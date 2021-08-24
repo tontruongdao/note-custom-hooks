@@ -1,10 +1,11 @@
-import { useState } from 'react'
 import useLocalStorage from './useLocalStorage';
+import useUpdateLogger from './useUpdateLogger';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
   const [name, setName] = useLocalStorage('name', '')
+  useUpdateLogger(name)
 
   return (
     <div className="App">
