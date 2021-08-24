@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [name, setName] = useLocalStorage('')
+  const [name, setName] = useLocalStorage('name', '')
 
   return (
     <div className="App">

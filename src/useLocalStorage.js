@@ -1,7 +1,23 @@
 import { useState } from 'react'
 
-export default function useLocalStorage(initialValue) {
-  const [value, setValue] = useState(initialValue)
+// Function to persist data
+function getSavedValue(key, initialValue) {
+  const savedValue = JSON.parse(localStorage.getItem(key))
+
+  if(savedValue) return savedValue;
+
+  if (initialValue instanceof Function) return initialValue();
+  return initialValue
+}
+
+
+// Custom Hook
+export default function useLocalStorage(key, initialValue) {
+
+  // Function is used in useState to avoid calling JSON.parse and localStorage at each rerendering.
+  const [value, setValue] = useState(() => {
+    return getSavedValue(key, initialValue)
+  })
 
   return [value, setValue]
 }
