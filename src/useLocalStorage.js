@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // Function to persist data
 function getSavedValue(key, initialValue) {
@@ -18,6 +18,10 @@ export default function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(() => {
     return getSavedValue(key, initialValue)
   })
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value))
+  }, [value])
 
   return [value, setValue]
 }
